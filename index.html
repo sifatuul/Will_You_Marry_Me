@@ -92,7 +92,7 @@
     </div>
 
     <!-- Background Music (Plays on page load) -->
-    <audio id="background-music" src="default.mp3" loop></audio>
+    <audio id="background-music" src="default.mp3" loop muted></audio>
 
     <!-- Button Click Music -->
     <audio id="love-audio" src="love.mp3" loop></audio>
@@ -113,19 +113,24 @@
             const backgroundMusic = document.getElementById("background-music");
             const loveAudio = document.getElementById("love-audio");
 
-            backgroundMusic.pause();  // Pause the background music
-            loveAudio.play();         // Play the love music
+            // Pause the background music and play the love music
+            backgroundMusic.pause();
+            loveAudio.play();
         }
 
-        // Start background music when the page loads
+        // Start background music when the page loads (muted initially to bypass autoplay restrictions)
         window.onload = function() {
             const backgroundMusic = document.getElementById("background-music");
 
-            // Attempt to play background music; may require user interaction in some browsers
-            backgroundMusic.play().catch(function() {
+            // Attempt to play background music with muted audio to bypass restrictions
+            backgroundMusic.play().then(function() {
+                // Once it's playing, unmute it
+                backgroundMusic.muted = false;
+            }).catch(function() {
                 // If autoplay is blocked, wait for a user interaction to start background music
                 document.addEventListener('click', function() {
                     backgroundMusic.play();
+                    backgroundMusic.muted = false;
                 }, { once: true });
             });
 
