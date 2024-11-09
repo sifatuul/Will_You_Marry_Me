@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Marry Me?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .yes-btn {
+            background-color: #00796b;
+            color: white;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        .yes-btn:hover {
+            background-color: #004d40;
+        }
+        .no-btn {
+            background-color: #e57373;
+            color: white;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: left 0.4s ease, top 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Will you Marry Me 🥲?</h1>
+        <div class="button-group">
+            <button class="yes-btn" onclick="playMusic()">Yes</button>
+            <button class="no-btn" onmouseover="moveButton()" onclick="playMusic()">No</button>
+        </div>
+    </div>
+
+    <audio id="love-audio" src="love.mp3"></audio>
+
+    <script>
+        function moveButton() {
+            const button = document.querySelector('.no-btn');
+
+            // Ensure button stays within the viewport
+            const randomX = Math.floor(Math.random() * (window.innerWidth - button.offsetWidth - 20));
+            const randomY = Math.floor(Math.random() * (window.innerHeight - button.offsetHeight - 20));
+
+            button.style.position = 'absolute';
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+        }
+
+        function playMusic() {
+            const audio = document.getElementById("love-audio");
+            audio.play();
+        }
+    </script>
+</body>
+</html>
+
