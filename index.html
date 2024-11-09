@@ -66,18 +66,21 @@
     <div class="container">
         <h1>Will you Marry Me 🥲?</h1>
         <div class="button-group">
-            <button class="yes-btn" onclick="playMusic()">Yes</button>
-            <button class="no-btn" onmouseover="moveButton()" onclick="playMusic()">No</button>
+            <button class="yes-btn" onclick="playLoveMusic()">Yes</button>
+            <button class="no-btn" onmouseover="moveButton()" onclick="playLoveMusic()">No</button>
         </div>
     </div>
 
-    <audio id="love-audio" src="love.mp3"></audio>
+    <!-- Background Music (Autoplay Attempt) -->
+    <audio id="background-music" src="default.mp3" loop></audio>
+
+    <!-- Button Click Music -->
+    <audio id="love-audio" src="love.mp3" loop></audio>
 
     <script>
+        // Function to move the "No" button around
         function moveButton() {
             const button = document.querySelector('.no-btn');
-
-            // Ensure button stays within the viewport
             const randomX = Math.floor(Math.random() * (window.innerWidth - button.offsetWidth - 20));
             const randomY = Math.floor(Math.random() * (window.innerHeight - button.offsetHeight - 20));
 
@@ -86,11 +89,24 @@
             button.style.top = randomY + 'px';
         }
 
-        function playMusic() {
-            const audio = document.getElementById("love-audio");
-            audio.play();
+        // Function to play love music when a button is clicked
+        function playLoveMusic() {
+            const loveAudio = document.getElementById("love-audio");
+            loveAudio.play();
         }
+
+        // Play background music on load
+        window.onload = function() {
+            const backgroundMusic = document.getElementById("background-music");
+
+            // Attempt to play background music; may require user interaction in some browsers
+            backgroundMusic.play().catch(function() {
+                // If autoplay is blocked, wait for a user interaction
+                document.addEventListener('click', function() {
+                    backgroundMusic.play();
+                }, { once: true });
+            });
+        };
     </script>
 </body>
 </html>
-
